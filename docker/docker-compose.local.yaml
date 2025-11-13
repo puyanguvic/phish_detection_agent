@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  phish-agent:
+    build: ..
+    ports:
+      - "8000:8000"
+    environment:
+      - UV_PROJECT_ENV=/opt/venv
+    volumes:
+      - ../src:/app/src
+      - ../configs:/app/configs
+      - ../pyproject.toml:/app/pyproject.toml:ro
+      - ../uv.lock:/app/uv.lock:ro
