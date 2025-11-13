@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  phish-agent:
+    build: ..
+    environment:
+      - UV_PROJECT_ENV=/opt/venv
+    depends_on:
+      - mock-threat-intel
+  mock-threat-intel:
+    image: ghcr.io/example/mock-threat-intel:latest
+    ports:
+      - "9000:9000"
