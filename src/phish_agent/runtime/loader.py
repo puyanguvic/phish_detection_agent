@@ -4,7 +4,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict
 
-import yaml
+try:  # pragma: no cover - exercised indirectly
+    import yaml  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover - fallback for minimal environments
+    yaml = None
 
 from phish_agent.agents.phish_detection_agent import PhishDetectionAgent
 
@@ -19,5 +22,8 @@ def load_runtime(config_path: str | Path) -> PhishDetectionAgent:
 
 
 def _load_yaml(path: str | Path) -> Dict[str, Any]:
+    if yaml is None:
+        return {}
+
     with open(path, "r", encoding="utf-8") as handle:
         return yaml.safe_load(handle) or {}

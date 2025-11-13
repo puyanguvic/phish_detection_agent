@@ -19,7 +19,11 @@ class FusionTool:
         return merged
 
     def _average_score(self, signals: Dict[str, float]) -> float:
-        relevant: List[float] = [value for value in signals.values() if isinstance(value, (int, float))]
+        relevant: List[float] = [
+            float(value)
+            for key, value in signals.items()
+            if key.endswith("_score") and key != "combined_score" and isinstance(value, (int, float))
+        ]
         if not relevant:
             return 0.0
         return round(sum(relevant) / len(relevant), 3)
