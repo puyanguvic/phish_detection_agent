@@ -22,5 +22,5 @@ class EmailAnalysisResult:
 
     verdict: str
     score: float
-    signals: Dict[str, float]
+    signals: Dict[str, object]
     metadata: Dict[str, object] = field(default_factory=dict)
